@@ -6,48 +6,29 @@ public class TennisGame1 implements TennisGame {
     public static final String FIFTEEN_ALL = "Fifteen-All";
     public static final String THIRTY_ALL = "Thirty-All";
     public static final String DEUCE = "Deuce";
-    private int m_score1 = 0;
-    private int m_score2 = 0;
-    private String player1Name;
-    private String player2Name;
+    private int playerOneScore = 0;
+    private int playerTwoScore = 0;
 
-    public TennisGame1(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+    public TennisGame1() {
     }
 
     public void wonPoint(String playerName) {
         if (playerName.equals(PLAYER_1))
-            m_score1 += 1;
+            playerOneScore += 1;
         else
-            m_score2 += 1;
+            playerTwoScore += 1;
     }
 
     public String getScore() {
         String score = "";
-        int tempScore=0;
-        if (m_score1==m_score2)
+        int tempScore;
+        if (playerOneScore == playerTwoScore)
         {
-            switch (m_score1)
-            {
-                case 0:
-                        score = LOVE_ALL;
-                    break;
-                case 1:
-                        score = FIFTEEN_ALL;
-                    break;
-                case 2:
-                        score = THIRTY_ALL;
-                    break;
-                default:
-                        score = DEUCE;
-                    break;
-                
-            }
+            score = getEvenScores();
         }
-        else if (m_score1>=4 || m_score2>=4)
+        else if (playerOneScore >=4 || playerTwoScore >=4)
         {
-            int minusResult = m_score1-m_score2;
+            int minusResult = playerOneScore - playerTwoScore;
             if (minusResult==1) score ="Advantage player1";
             else if (minusResult ==-1) score ="Advantage player2";
             else if (minusResult>=2) score = "Win for player1";
@@ -57,8 +38,8 @@ public class TennisGame1 implements TennisGame {
         {
             for (int i=1; i<3; i++)
             {
-                if (i==1) tempScore = m_score1;
-                else { score+="-"; tempScore = m_score2;}
+                if (i==1) tempScore = playerOneScore;
+                else { score+="-"; tempScore = playerTwoScore;}
                 switch(tempScore)
                 {
                     case 0:
@@ -75,6 +56,27 @@ public class TennisGame1 implements TennisGame {
                         break;
                 }
             }
+        }
+        return score;
+    }
+
+    private String getEvenScores() {
+        String score;
+        switch (playerOneScore)
+        {
+            case 0:
+                    score = LOVE_ALL;
+                break;
+            case 1:
+                    score = FIFTEEN_ALL;
+                break;
+            case 2:
+                    score = THIRTY_ALL;
+                break;
+            default:
+                    score = DEUCE;
+                break;
+
         }
         return score;
     }
