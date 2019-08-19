@@ -36,13 +36,9 @@ public class TennisGame1 implements TennisGame {
         }
         else
         {
-            //score = playerOneScore+"-"+playerTwoScore;
-            for (int i=1; i<3; i++)
-            {
-                if (i==1) tempScore = playerOneScore;
-                else { score+="-"; tempScore = playerTwoScore;}
-                score += getNormalScore(tempScore);
-            }
+            score += getNormalScore(playerOneScore);
+            score+="-";
+            score += getNormalScore(playerTwoScore);
         }
         return score;
     }
