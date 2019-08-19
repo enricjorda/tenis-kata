@@ -1,6 +1,11 @@
 
 public class TennisGame1 implements TennisGame {
-    
+
+    public static final String PLAYER_1 = "player1";
+    public static final String LOVE_ALL = "Love-All";
+    public static final String FIFTEEN_ALL = "Fifteen-All";
+    public static final String THIRTY_ALL = "Thirty-All";
+    public static final String DEUCE = "Deuce";
     private int m_score1 = 0;
     private int m_score2 = 0;
     private String player1Name;
@@ -12,7 +17,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (playerName == "player1")
+        if (playerName.equals(PLAYER_1))
             m_score1 += 1;
         else
             m_score2 += 1;
@@ -26,16 +31,16 @@ public class TennisGame1 implements TennisGame {
             switch (m_score1)
             {
                 case 0:
-                        score = "Love-All";
+                        score = LOVE_ALL;
                     break;
                 case 1:
-                        score = "Fifteen-All";
+                        score = FIFTEEN_ALL;
                     break;
                 case 2:
-                        score = "Thirty-All";
+                        score = THIRTY_ALL;
                     break;
                 default:
-                        score = "Deuce";
+                        score = DEUCE;
                     break;
                 
             }
