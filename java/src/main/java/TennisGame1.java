@@ -36,33 +36,30 @@ public class TennisGame1 implements TennisGame {
         }
         else
         {
+            //score = playerOneScore+"-"+playerTwoScore;
             for (int i=1; i<3; i++)
             {
                 if (i==1) tempScore = playerOneScore;
                 else { score+="-"; tempScore = playerTwoScore;}
-                score = getNormalScore(score, tempScore);
+                score += getNormalScore(tempScore);
             }
         }
         return score;
     }
 
-    private String getNormalScore(String score, int tempScore) {
+    private String getNormalScore(int tempScore) {
         switch(tempScore)
         {
             case 0:
-                score+= LOVE;
-                break;
+                return  LOVE;
             case 1:
-                score+= FIFTEEN;
-                break;
+                return  FIFTEEN;
             case 2:
-                score+= THIRTY;
-                break;
+                return  THIRTY;
             case 3:
-                score+= FORTY;
-                break;
+                return  FORTY;
         }
-        return score;
+        return "";
     }
 
     private String getScoreForAdvantage() {
