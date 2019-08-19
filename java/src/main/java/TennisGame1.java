@@ -24,66 +24,82 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        if (playerOneScore == playerTwoScore)
-            return getEvenScores();
+        if (isDeuce())
+            return getDeuceScore();
         else if (isAdvantage())
-            return getScoreForAdvantage();
+            return getAdvantageScore();
         else
-            return getNormalScores();
+            return getNormalScore();
 
     }
 
-    private String getNormalScores() {
-        String score = getPlayerStandardScore(playerOneScore);
-        score+="-";
-        score += getPlayerStandardScore(playerTwoScore);
+    private boolean isDeuce() {
+        return playerOneScore == playerTwoScore;
+    }
+
+    private String getNormalScore() {
+        String score = getNormalScoreFor(playerOneScore);
+        score += "-";
+        score += getNormalScoreFor(playerTwoScore);
         return score;
     }
 
-    private String getPlayerStandardScore(int playerScore) {
-        switch(playerScore)
-        {
+    private String getNormalScoreFor(int playerScore) {
+        switch (playerScore) {
             case 0:
-                return  LOVE;
+                return LOVE;
             case 1:
-                return  FIFTEEN;
+                return FIFTEEN;
             case 2:
-                return  THIRTY;
+                return THIRTY;
             case 3:
-                return  FORTY;
+                return FORTY;
         }
         return "";
     }
 
-    private String getScoreForAdvantage() {
-        String score;
-        int minusResult = playerOneScore - playerTwoScore;
-        if (minusResult==1) score ="Advantage player1";
-        else if (minusResult ==-1) score ="Advantage player2";
-        else if (minusResult>=2) score = "Win for player1";
-        else score ="Win for player2";
-        return score;
+    private String getAdvantageScore() {
+
+        if (isAdvantagePlayerOne())
+            return "Advantage player1";
+        else if (isAdvantagePlayerTwo())
+            return "Advantage player2";
+        else if (playerOneIsWinner())
+            return "Win for player1";
+        else
+            return "Win for player2";
+    }
+
+    private boolean playerOneIsWinner() {
+        return playerOneScore - playerTwoScore >= 2;
+    }
+
+    private boolean isAdvantagePlayerTwo() {
+        return playerOneScore - playerTwoScore == -1;
+    }
+
+    private boolean isAdvantagePlayerOne() {
+        return playerOneScore - playerTwoScore == 1;
     }
 
     private boolean isAdvantage() {
-        return playerOneScore >=4 || playerTwoScore >=4;
+        return playerOneScore >= 4 || playerTwoScore >= 4;
     }
 
-    private String getEvenScores() {
+    private String getDeuceScore() {
         String score;
-        switch (playerOneScore)
-        {
+        switch (playerOneScore) {
             case 0:
-                    score = LOVE_ALL;
+                score = LOVE_ALL;
                 break;
             case 1:
-                    score = FIFTEEN_ALL;
+                score = FIFTEEN_ALL;
                 break;
             case 2:
-                    score = THIRTY_ALL;
+                score = THIRTY_ALL;
                 break;
             default:
-                    score = DEUCE;
+                score = DEUCE;
                 break;
 
         }
