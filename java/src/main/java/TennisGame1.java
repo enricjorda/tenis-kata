@@ -36,15 +36,20 @@ public class TennisGame1 implements TennisGame {
         }
         else
         {
-            score += getNormalScore(playerOneScore);
-            score+="-";
-            score += getNormalScore(playerTwoScore);
+            score = getNormalScores(score);
         }
         return score;
     }
 
-    private String getNormalScore(int tempScore) {
-        switch(tempScore)
+    private String getNormalScores(String score) {
+        score += getPlayerStandardScore(playerOneScore);
+        score+="-";
+        score += getPlayerStandardScore(playerTwoScore);
+        return score;
+    }
+
+    private String getPlayerStandardScore(int playerScore) {
+        switch(playerScore)
         {
             case 0:
                 return  LOVE;
