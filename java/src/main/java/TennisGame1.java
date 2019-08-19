@@ -24,25 +24,17 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        String score = "";
-        int tempScore;
         if (playerOneScore == playerTwoScore)
-        {
-            score = getEvenScores();
-        }
+            return getEvenScores();
         else if (isAdvantage())
-        {
-            score = getScoreForAdvantage();
-        }
+            return getScoreForAdvantage();
         else
-        {
-            score = getNormalScores(score);
-        }
-        return score;
+            return getNormalScores();
+
     }
 
-    private String getNormalScores(String score) {
-        score += getPlayerStandardScore(playerOneScore);
+    private String getNormalScores() {
+        String score = getPlayerStandardScore(playerOneScore);
         score+="-";
         score += getPlayerStandardScore(playerTwoScore);
         return score;
