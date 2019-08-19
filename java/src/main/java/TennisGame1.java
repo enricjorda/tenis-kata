@@ -1,11 +1,15 @@
 
 public class TennisGame1 implements TennisGame {
 
-    public static final String PLAYER_1 = "player1";
-    public static final String LOVE_ALL = "Love-All";
-    public static final String FIFTEEN_ALL = "Fifteen-All";
-    public static final String THIRTY_ALL = "Thirty-All";
-    public static final String DEUCE = "Deuce";
+    private static final String PLAYER_1 = "player1";
+    private static final String LOVE_ALL = "Love-All";
+    private static final String FIFTEEN_ALL = "Fifteen-All";
+    private static final String THIRTY_ALL = "Thirty-All";
+    private static final String DEUCE = "Deuce";
+    private static final String LOVE = "Love";
+    private static final String FIFTEEN = "Fifteen";
+    private static final String THIRTY = "Thirty";
+    private static final String FORTY = "Forty";
     private int playerOneScore = 0;
     private int playerTwoScore = 0;
 
@@ -36,22 +40,27 @@ public class TennisGame1 implements TennisGame {
             {
                 if (i==1) tempScore = playerOneScore;
                 else { score+="-"; tempScore = playerTwoScore;}
-                switch(tempScore)
-                {
-                    case 0:
-                        score+="Love";
-                        break;
-                    case 1:
-                        score+="Fifteen";
-                        break;
-                    case 2:
-                        score+="Thirty";
-                        break;
-                    case 3:
-                        score+="Forty";
-                        break;
-                }
+                score = getNormalScore(score, tempScore);
             }
+        }
+        return score;
+    }
+
+    private String getNormalScore(String score, int tempScore) {
+        switch(tempScore)
+        {
+            case 0:
+                score+= LOVE;
+                break;
+            case 1:
+                score+= FIFTEEN;
+                break;
+            case 2:
+                score+= THIRTY;
+                break;
+            case 3:
+                score+= FORTY;
+                break;
         }
         return score;
     }
